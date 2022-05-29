@@ -8,23 +8,24 @@ class Solution{
 public:
     int *findTwoElement(int *arr, int n) {
         // code here
-        
-        sort(arr,arr+n);
-        int* nums = arr;
-        int miss = 1,rep;
         int* res = new int[2];
+        int* lookup = new int[n+1]{0} ;
+        int miss,rep;
         for(int i = 0 ; i < n ; i++){
-            if(i+1 < n && nums[i] == nums[i+1]){
-                rep = nums[i];
+            if(lookup[arr[i]] == 0){
+                lookup[arr[i]] += 1;
             }
-            
-            if(arr[i] == miss){
-                miss++;
+            else{
+                rep = arr[i];
+            }
+        }
+        for(int i = 1 ; i < n+1 ; i++){
+            if(lookup[i] == 0){
+                miss = i;
             }
         }
         res[0] = rep;
         res[1] = miss;
-        
         
         return res;
         
