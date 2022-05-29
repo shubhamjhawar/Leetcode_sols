@@ -12,16 +12,15 @@ public:
         int* lookup = new int[n+1]{0} ;
         int miss,rep;
         for(int i = 0 ; i < n ; i++){
-            if(lookup[arr[i]] == 0){
-                lookup[arr[i]] += 1;
+            if(arr[abs(arr[i])-1] < 0){
+                rep = abs(arr[i]);
             }
-            else{
-                rep = arr[i];
-            }
+            else
+                arr[abs(arr[i])-1] *= -1;
         }
-        for(int i = 1 ; i < n+1 ; i++){
-            if(lookup[i] == 0){
-                miss = i;
+        for(int i = 0 ; i < n ; i++){
+            if(arr[i] > 0){
+                miss = i+1;
             }
         }
         res[0] = rep;
