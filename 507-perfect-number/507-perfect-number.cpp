@@ -1,8 +1,29 @@
 class Solution {
 public:
-    bool checkPerfectNumber(int num) {
+    vector<int> selfDividingNumbers(int left, int right) {
         
-        return ((num == 6) || (num == 28) || (num == 496) || (num == 8128) || (num == 33550336));
+        vector<int> res;
+        for(int i = left ; i <= right ; i++){
+            int n = i;
+            int number = i;
+            bool flag = true;
+            while(n){
+                int d = n%10;
+                
+                if(d == 0 || number%d != 0){
+                    flag = false;
+                    break;
+                }
+                
+                n = n/10;
+            }
+            
+            if(flag){
+                res.push_back(number);
+            }
+        }
+        
+        return res;
         
     }
 };
