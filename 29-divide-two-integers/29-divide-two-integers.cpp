@@ -9,7 +9,7 @@ public:
         unsigned int b = abs(divisor);
         unsigned int ans = 0;
         while(a >= b){
-            short q = 0;
+            int q = 0;
             
             while(a > (b<<q+1)){
                 q++;
