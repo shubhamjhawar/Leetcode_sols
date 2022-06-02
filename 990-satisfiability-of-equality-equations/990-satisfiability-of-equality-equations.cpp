@@ -22,26 +22,25 @@ public:
 for(auto& eqn : equations){
             
      if(eqn[0] == eqn[3]){
-        if(eqn[1] == '!'){
-                   return false;     
-            } 
+        if(eqn[1] == '!')
+        {
+            return false;     
+        } 
     
          continue;
-       }
+      }
           
             
-             if(eqn[1] == '='){
+       if(eqn[1] == '='){
                 graph[eqn[0]].push_back(eqn[3]);
                 graph[eqn[3]].push_back(eqn[0]);
-            }
+        }
             
-            }
+}
             
         
-        int label = 0;
-        
-        
-        
+       int label = 0;
+    
         for(auto& node : graph){
             if(visited.find(node.first) == visited.end()){
                 dfs(graph,visited,node.first,label);
