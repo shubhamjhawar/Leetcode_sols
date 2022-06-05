@@ -1,34 +1,35 @@
 class Solution {
 public:
-    int f(int i,int j,vector<vector<int>>& matrix,vector<vector<int>>& dp){
-        int n = matrix.size();
-        //Base case
-        if(j < 0 || j >= n)
-            return 1e9;
-        if(i == 0) return 
-            matrix[0][j];
+    int f(vector<vector<int>>& matrix,vector<vector<int>>& dp){
+       int n = matrix.size();
+       for(int k = 0 ;k < n ; k++){
+           dp[0%2][k] = matrix[0%2][k];
+       }
         
-        if(dp[i][j] != 100005){
-            return dp[i][j];
-        }
-        
-        //Recursive case
-        int up = f(i-1,j,matrix,dp) + matrix[i][j];
-        int ld = f(i-1,j-1,matrix,dp)  + matrix[i][j];
-        int rd = f(i-1,j+1,matrix,dp)  + matrix[i][j];
-        
-        return dp[i][j] =  min(up,min(ld,rd));
-        
+       for(int i = 1 ; i < n ;i++){
+           for(int j = 0 ; j < n ; j++){
+               int up = 1e9,ld = 1e9 ,rd = 1e9;
+                up = dp[(i-1)%2][j] + matrix[i][j];
+               if(j-1 >= 0){
+                   ld = dp[(i-1)%2][j-1] + matrix[i][j];
+               }
+               if(j+1 < n){
+                   rd = dp[(i-1)%2][j+1] + matrix[i][j];
+               }
+               
+               dp[i%2][j] = min(up,min(ld,rd));
+           }
+       }
+       int min_elt = INT_MAX;
+       for(int i = 0 ; i < n ; i++){
+           min_elt = min(min_elt,dp[(n-1)%2][i]);
+       }
+       return min_elt;
     }
     int minFallingPathSum(vector<vector<int>>& matrix) {
         int n = matrix.size();
-        int mini = INT_MAX;
-        vector<vector<int>> dp(n,vector<int>(n,100005));
-        for(int i = 0  ;i < n ; i++){
-            int ans = f(n-1,i,matrix,dp);
-            mini = min(mini,ans);
-        }
-        
-        return mini;
+        vector<vector<int>> dp(2,vector<int>(n,100005));
+        return f(matrix,dp);
+
     }
 };
