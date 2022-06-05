@@ -9,7 +9,7 @@ vector<vector<int> > &dp){
     if(i==0)
         return matrix[0][j];
     
-    if(dp[i][j]!=-1) return dp[i][j];
+    if(dp[i][j]!=-100005) return dp[i][j];
     
     int up = matrix[i][j] + getMaxUtil(i-1,j,m,matrix,dp);
     int leftDiagonal = matrix[i][j] + getMaxUtil(i-1,j-1,m,matrix,dp);
@@ -22,7 +22,7 @@ vector<vector<int> > &dp){
     int n = matrix.size();
     //int m = matrix[0].size();
     
-    vector<vector<int>> dp(n,vector<int>(n,-1));
+    vector<vector<int>> dp(n,vector<int>(n,-100005));
     
     int maxi = INT_MAX;
     
