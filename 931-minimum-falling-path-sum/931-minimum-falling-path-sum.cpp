@@ -5,8 +5,8 @@ public:
         //Base case
         if(j < 0 || j >= n)
             return 1e9;
-        if(i == 0) return 
-            matrix[0][j];
+        if(i == 0)  
+           return matrix[0][j];
         
         if(dp[i][j] != 100005){
             return dp[i][j];
