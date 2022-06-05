@@ -20,14 +20,14 @@ vector<vector<int> > &dp){
 }
  int minFallingPathSum(vector<vector<int>>& matrix) {
     int n = matrix.size();
-    int m = matrix[0].size();
+    //int m = matrix[0].size();
     
-    vector<vector<int>> dp(n,vector<int>(m,-1));
+    vector<vector<int>> dp(n,vector<int>(n,-1));
     
     int maxi = INT_MAX;
     
-    for(int j=0; j<m;j++){
-        int ans = getMaxUtil(n-1,j,m,matrix,dp);
+    for(int j=0; j<n;j++){
+        int ans = getMaxUtil(n-1,j,n,matrix,dp);
         maxi = min(maxi,ans);
     }
     
