@@ -23,7 +23,7 @@ public:
                 third = second;
                 second = nums[i];
             }
-            else if(nums[i] >= third){
+            else if(nums[i] > third){
                 third = nums[i];
             }
         }
