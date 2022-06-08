@@ -27,9 +27,16 @@ int main()
 
 
 //User function Template for C++
-
+void reverseArr(int* arr,int i,int end){
+    if(i >= end)
+      return;
+    
+    //Do this
+    swap(arr[i],arr[end]);
+    reverseArr(arr,i+1,end-1);
+}
 void rotate(int arr[], int n)
 {
-    reverse(arr,arr+n-1);
-    reverse(arr,arr+n);
+    reverseArr(arr,0,n-2);
+    reverseArr(arr,0,n-1);
 }
