@@ -8,8 +8,12 @@ public:
       dp[0][arr[0]] = true;
     
     for(int i = 1; i < n ;i++){
-         dp[i][0] = true;
-        for(int target = 1 ; target <= k ; target++){
+         // dp[i][0] = true;
+        for(int target = 0 ; target <= k ; target++){
+            if(target == 0){
+                dp[i][target] = true;
+                continue;
+            }
             bool not_take = dp[(i-1)][target];
             bool take = false;
             if(arr[i] <= target){
