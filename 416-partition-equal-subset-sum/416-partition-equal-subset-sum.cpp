@@ -5,26 +5,26 @@ public:
     
     
     if(arr[0]<=k)
-      dp[0][arr[0]] = true;
+      dp[0%2][arr[0]] = true;
     
     for(int i = 1; i < n ;i++){
          // dp[i][0] = true;
         for(int target = 0 ; target <= k ; target++){
             if(target == 0){
-                dp[i][target] = true;
+                dp[i%2][target] = true;
                 continue;
             }
-            bool not_take = dp[(i-1)][target];
+            bool not_take = dp[(i-1)%2][target];
             bool take = false;
             if(arr[i] <= target){
-                take = dp[(i-1)][target - arr[i]];
+                take = dp[(i-1)%2][target - arr[i]];
             }
             
-            dp[i][target] = take || not_take ;
+            dp[i%2][target] = take || not_take ;
         }
     }
     
-    return dp[(n-1)][k];
+    return dp[(n-1)%2][k];
 }
 bool canPartition(vector<int>& nums) {
     int n = nums.size();
@@ -35,7 +35,7 @@ bool canPartition(vector<int>& nums) {
         return false;
     else
         k = S/2;
-    vector<vector<bool>> dp (n, vector<bool>(k+1, false));
+    vector<vector<bool>> dp (2, vector<bool>(k+1, false));
     return f(nums,k,n,dp);
     }
 };
