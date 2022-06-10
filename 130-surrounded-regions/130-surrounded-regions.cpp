@@ -1,44 +1,25 @@
 class Solution {
 public:
-void DFS(vector<vector<char>>& board, int i, int j, int m, int n) {
-        if(i<0 or j<0 or i>=m or j>=n or board[i][j] != 'O') return;
+vector<vector<int>> nbrs = {{1,0} , {0,1} , {-1,0} , {0,-1} };
+void DFS(vector<vector<char>>& board, int i, int j,int m ,int n ) {
+         
+         
+        //marking them as visited
         board[i][j] = '#';
-        DFS(board, i-1, j, m, n);
-        DFS(board, i+1, j, m, n);
-        DFS(board, i, j-1, m, n);
-        DFS(board, i, j+1, m, n);
+        for(auto& nbr : nbrs){
+            int x = i + nbr[0];
+            int y = j + nbr[1];
+            
+           if(x < 0 or y < 0 or x>= m or y >= n or board[x][y] != 'O' ) 
+              continue; 
+            
+           DFS(board,x,y,m,n);
+            
+        }
     }
     
     void solve(vector<vector<char>>& board) {
-      
-      //We will use boundary DFS to solve this problem
-        
-      // Let's analyze when an 'O' cannot be flipped,
-      // if it has atleast one 'O' in it's adjacent, AND ultimately this chain of adjacent 'O's is connected to some 'O' which lies on boundary of board
-        
-      //consider these two cases for clarity :
-      /*
-        O's won't be flipped          O's will be flipped
-        [X O X X X]                   [X X X X X]     
-        [X O O O X]                   [X O O O X]
-        [X O X X X]                   [X O X X X] 
-        [X X X X X]                   [X X X X X]
-      
-      So we can conclude if a chain of adjacent O's is connected some O on boundary then they cannot be flipped
-      
-      */
-        
-      //Steps to Solve :
-      //1. Move over the boundary of board, and find O's 
-      //2. Every time we find an O, perform DFS from it's position
-      //3. In DFS convert all 'O' to '#'      (why?? so that we can differentiate which 'O' can be flipped and which cannot be)   
-      //4. After all DFSs have been performed, board contains three elements,#,O and X
-      //5. 'O' are left over elements which are not connected to any boundary O, so flip them to 'X'
-      //6. '#' are elements which cannot be flipped to 'X', so flip them back to 'O'
-      //7. finally, Upvote the solution\U0001f60a   
-        
-      
-     int m = board.size();
+      int m = board.size();
         
       if(m == 0) return;  
         
@@ -63,11 +44,12 @@ void DFS(vector<vector<char>>& board, int i, int j, int m, int n) {
         
      for(int i=0; i<m; i++)
          for(int j=0; j<n; j++)
-         {
+         {  
              if(board[i][j] == 'O')
                  board[i][j] = 'X';
              if(board[i][j] == '#')
                  board[i][j] = 'O';
          }
+        cout << endl;
     }
 };
