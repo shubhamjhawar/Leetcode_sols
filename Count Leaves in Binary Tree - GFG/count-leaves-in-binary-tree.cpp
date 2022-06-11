@@ -105,6 +105,7 @@ void f(Node* root,int& res){
          //if reached the root node check for the contri value and answer the 
          if(!root->left && !root->right){
              res += 1;
+             return;
          }
         
         //Recursive soln
