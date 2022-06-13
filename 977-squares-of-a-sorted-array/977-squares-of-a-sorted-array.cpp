@@ -8,14 +8,12 @@ public:
         
         while(low <= high){
             if(abs(nums[low]) < abs(nums[high])){
-                res[last_seen] = nums[high]*nums[high];
+                res[last_seen--] = nums[high]*nums[high];
                 high--;
-                last_seen--;
             }
             else{
-                res[last_seen] = nums[low]*nums[low];
+                res[last_seen--] = nums[low]*nums[low];
                 low++;
-                last_seen--;
             }
         }
         
