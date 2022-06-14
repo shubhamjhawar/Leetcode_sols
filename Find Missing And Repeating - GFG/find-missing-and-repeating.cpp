@@ -8,23 +8,55 @@ class Solution{
 public:
     int *findTwoElement(int *arr, int n) {
         // code here
-        int* res = new int[2];
-        int* lookup = new int[n+1]{0} ;
-        int miss,rep;
-        for(int i = 0 ; i < n ; i++){
-            if(arr[abs(arr[i])-1] < 0){
-                rep = abs(arr[i]);
-            }
-            else
-                arr[abs(arr[i])-1] *= -1;
+       int runXor = 0,i;
+       int* res = new int[2];
+       for(i = 0 ; i < n ; i++){
+           runXor ^= arr[i];
+           runXor ^= i+1;
+       }
+       
+       //X^Y = runXor;
+       
+       int set_bit_no = runXor & ~(runXor - 1);
+       
+       
+       int bucket1 = 0;
+       int bucket2 = 0;
+       
+       for(i = 0 ; i < n ; i++){
+           if(arr[i]&set_bit_no){
+               bucket1 ^= arr[i];
+           } 
+           else{
+              bucket2 ^= arr[i]; 
+           }
+              
+       }
+       
+       for (i = 1; i <= n; i++)
+       {
+        if (i & set_bit_no)
+            bucket1 ^= i;
+        else
+            bucket2 ^= i;
+       }
+    
+    //   cout << bucket1 << "   " << bucket2 << endl;
+       
+       int x_count = 0;
+        for (int i=0; i<n; i++) {
+        if (arr[i]== bucket1)
+            x_count++;
         }
-        for(int i = 0 ; i < n ; i++){
-            if(arr[i] > 0){
-                miss = i+1;
-            }
+        
+        if(x_count){
+            res[0] = bucket1;
+            res[1] = bucket2;
+            return res;
         }
-        res[0] = rep;
-        res[1] = miss;
+        
+        res[0] = bucket2;
+        res[1] = bucket1;
         
         return res;
         
