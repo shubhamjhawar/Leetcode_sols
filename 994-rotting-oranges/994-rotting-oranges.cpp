@@ -19,16 +19,13 @@ public:
                 if(grid[i][j] == 2){
                     q.push(node(i,j,0));
                 }
-    
                 if(grid[i][j] != 0){
                     cntNot0++;
                 }
             }
-            
         }
         
-        int dx[] = {-1,0,1,0};
-        int dy[] =  {0,1,0,-1};
+        vector<vector<int>> nbrs = {{1,0} , {0,1} , {-1,0} , {0,-1} };
         int res = 0;
         int cnt = 0;
         while(q.size()){
@@ -41,20 +38,19 @@ public:
             
             res = max(res,time);
             
-            for(int i  = 0 ; i < 4 ; i++){
-                int newX = x + dx[i];
-                int newY = y + dy[i];
-                
-                if(newX >= 0 and newY >= 0 and newX < n and newY < m and grid[newX][newY] == 1){
-                    grid[newX][newY] = 2;
-                    q.push(node(newX,newY,time+1));
+             for(auto& nbr: nbrs){
+                int _x = x + nbr[0];
+                int _y = y + nbr[1];
+                 
+                if(_x >= 0 and _y >= 0 and _x < n and _y < m and grid[_x][_y] == 1){
+                    grid[_x][_y] = 2;
+                    q.push(node(_x,_y,time+1)); 
                 }
-            }
+                 
+              }
+          }
             
-        }
-        cout << cnt << " " << cntNot0 << endl;
-         
-        if(cnt == cntNot0) 
+         if(cnt == cntNot0) 
             return res;
         return -1;
         
