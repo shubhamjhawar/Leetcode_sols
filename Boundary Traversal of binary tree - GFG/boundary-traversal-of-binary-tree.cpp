@@ -103,73 +103,82 @@ struct Node
     Node* left, * right;
 }; */
 
+
 class Solution {
 public:
-    bool isLeaf(Node* root){
-        return root->left == NULL && root->right == NULL;
-    }
-    void leftBoundary(Node* root,vector<int>& res){
-        Node* curr = root->left;
-        while(curr){
-            if(!isLeaf(curr)){
-               res.push_back(curr->data); 
-            }
-            if(curr->left) 
-                curr = curr->left;
-            else
-                curr = curr->right;
-        }
-    }
-    void inorder(Node* root,vector<int>& res){
+bool isl(Node* root){
+   if(root->left==NULL && root->right==NULL)
+     return true;
+   else
+     return false;
+}
+void lb(Node* root,vector<int> &v){
+       if(isl(root))
+          return;
+       root = root->left;
+       while(root){
+           if(!isl(root))
+           v.push_back(root->data);
+           if(root->left)
+              root=root->left;
+           else
+              root=root->right;
+       }
+   }
+  void inorder(Node* root,vector<int>& res){
         
         //Base case
         if(!root){
             return;
         }
         
-         if(isLeaf(root)){
+         if(isl(root)){
              res.push_back(root->data);
+             return;
          } 
          
         //Recursive case
         inorder(root->left,res);
         inorder(root->right,res);
     }
-void rightBoundary(Node* root,vector<int>& res){
-        Node* curr = root;
-        curr = curr->right;
-        vector<int> temp;
-        while(curr){
-            if(!isLeaf(curr)) temp.push_back(curr->data);
-            if(curr->right){
-                curr = curr->right;
-            }
-            else{
-                curr = curr->left;
-            }
-        }
-        
-        
-        reverse(temp.begin(),temp.end());
-        for(int i = 0 ; i < temp.size() ; i++){
-            res.push_back(temp[i]);
-        }
-        
-}
-    vector <int> boundary(Node *root)
-    {
-        // Write your code here.
-        vector<int>res;
-        if(!isLeaf(root)){
-            res.push_back(root->data);
-        }
-        leftBoundary(root,res);
-        inorder(root,res);
-        rightBoundary(root,res);
-        
-        return res;
-    
-    }
+   void rb(Node* root,vector<int> &v){
+       if(root->right==NULL)
+       return;
+       root=root->right;
+       vector<int> a;
+        if(isl(root))
+       return;
+       
+       while(root){
+            if(!isl(root))
+           a.push_back(root->data);
+             if(root->right)
+                 root=root->right;
+           else
+                 root=root->left;
+       }
+       int s=a.size();
+       for(int i=s-1;i>=0;i--){
+           v.push_back(a[i]);
+       }
+       
+       
+   }
+   vector <int> boundary(Node *root)
+   {
+       //Your code here
+      
+       vector<int> ans;
+        if(root==NULL)
+           return ans;
+       if(!isl(root)){
+           ans.push_back(root->data);
+       }
+       lb(root,ans);
+       inorder(root,ans);
+       rb(root,ans);
+       return ans;
+   }
 };
 
 // { Driver Code Starts.
