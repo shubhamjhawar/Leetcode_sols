@@ -12,14 +12,20 @@ class Solution{
     public:
 
     //Function to check if two arrays are equal or not.
-    bool check(vector<ll> A, vector<ll> B, int N) {
-        //code here
-        sort(A.begin(),A.end());
-        sort(B.begin(),B.end());
-        
-        return A == B;
-        
-    }
+  bool check(vector<ll> A, vector<ll> B, int N) {
+       //code here
+       unordered_map<ll,int> m;
+       for(int i=0;i<N;i++)
+       {
+           m[A[i]]++;
+       }
+        for(int i=0;i<N;i++)
+       {
+          if(m[B[i]]==0)return 0;
+          if(m[B[i]]>0)m[B[i]]--;
+       }
+         return 1;
+}
 };
 
 // { Driver Code Starts.
