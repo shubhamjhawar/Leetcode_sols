@@ -20,15 +20,20 @@ public:
                 j++;
             }
             else if(j - i + 1 == k){
-                bool isEqual = check(haystack,i,j,needle);
-                if(isEqual) {
+                if(haystack[i] != needle[0]){
+                    i++;
+                    j++;
+                }
+            else{
+                 bool isEqual = check(haystack,i,j,needle);
+                  if(isEqual) {
                     flag = true;
                      break;
-                }
-                   
-                i++;
-                j++;
-            }
+                   }
+                  i++;
+                  j++;  
+              }  
+          }
                 
         }
         
