@@ -11,17 +11,11 @@ public:
            return;
        }
        
-       if(target < 0){
+       //Not Possible any answer case
+       if(start > end || target < 0){
            return;
        }
-       
-       if(start > end){
-           return;
-       }
-       
-       
-       
-       
+      
        //Recursive case
        //Not Take case
        f(candidates,start+1,end,target,contri,res);
