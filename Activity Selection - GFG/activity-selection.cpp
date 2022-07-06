@@ -36,13 +36,12 @@ class Solution
         int cnt = 1;
         int limit = meet[0].end;
         
-        for(int i = 1 ; i < n ; i++){
-           if(meet[i].start > limit){
-               cnt++;
-               limit = meet[i].end;
-           }
+        for(int i = 0;i < n ; i++){
+            if(meet[i].start > limit){
+                cnt++;
+                limit = meet[i].end;
+            }
         }
-        
         return cnt;
     }
 };
