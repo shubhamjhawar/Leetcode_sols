@@ -3,8 +3,8 @@ public:
       int f(int i1,int i2,vector<vector<int>>& dp,string& text1, string& text2,string& SCS){
     
         
-        for(int  j = 0 ; j <= i2 ; j++)dp[0][j] = 0;
-        for(int i = 0 ; i <= i1 ; i++) dp[i][0] = 0;
+    for(int  j = 0 ; j <= i2 ; j++)dp[0][j] = 0;
+    for(int i = 0 ; i <= i1 ; i++) dp[i][0] = 0;
         
       for(int i = 1 ; i <= i1 ; i++){
          for(int j = 1 ; j <= i2 ; j++){
@@ -20,6 +20,13 @@ public:
   int len = dp[i1][i2];
   int i = i1;
   int j = i2;
+//   for(int i = 0 ; i <= i1 ; i++){
+//       for(int j = 0 ; j <= i2 ; j++){
+//           cout << dp[i][j] <<" ";
+//       }
+      
+//       cout << endl;
+//   }
 
   int index = len - 1;
   string ans = "";
