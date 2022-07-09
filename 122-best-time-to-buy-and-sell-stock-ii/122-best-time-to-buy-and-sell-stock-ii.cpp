@@ -1,28 +1,20 @@
 class Solution {
 public:
-    int f(int index,int option,vector<vector<int>>& dp,vector<int>& prices){
+    int f(int n,int option,vector<vector<int>>& dp,vector<int>& prices){
+         dp[n][0] = 0,dp[n][1] = 0;
         
-        //Base case
-        if(index == prices.size()){
-            return 0;
-        }
+         for(int i = n-1; i >= 0 ; i--){
+               dp[i][1] = max(-prices[i] + dp[i+1][0],dp[i+1][1]);
+               dp[i][0] = max( prices[i] + dp[i+1][1],dp[i+1][0]);
+         }
         
         
-        if(dp[index][option] != -1){
-            return dp[index][option];
-        }
-        
-        if(option == 1){
-            dp[index][option] = max(-prices[index] + f(index+1,0,dp,prices),f(index+1,1,dp,prices)); 
-        }
-        else{
-            dp[index][option] = max(prices[index] + f(index+1,1,dp,prices),f(index+1,0,dp,prices));  
-        }
-        
-        return dp[index][option];  
+        return dp[0][1];
+
     }
     int maxProfit(vector<int>& prices) {
-        vector<vector<int>> dp(prices.size(),vector<int>(2,-1));
-        return f(0,1,dp,prices);
+        int n = prices.size();
+        vector<vector<int>> dp(n+1,vector<int>(2,-1));
+        return f(n,1,dp,prices);
     }
 };
