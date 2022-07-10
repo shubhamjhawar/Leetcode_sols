@@ -1,20 +1,11 @@
 class Solution {
 public:
-    int fillCups(vector<int>& amount) {
-         sort(amount.begin(),amount.end());
-        
-         int res = 0;
-         while(amount[2] != 0){
-          amount[2]--;
-          res++;
-         if(amount[1] > 0){
-             amount[1]--;
-         }
-             
-         sort(amount.begin(),amount.end());
-             
+      int fillCups(vector<int>& A) {
+        int mx = 0, sum = 0;
+        for(int& a: A) {
+            mx = max(a, mx);
+            sum += a;
         }
-    
-        return res;
+        return max(mx, (sum + 1) / 2);
     }
 };
