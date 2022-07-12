@@ -18,18 +18,15 @@ class Solution
             //Push into the stack
             if(s[i] == '(' or s[i] == '{' or s[i] == '['){
                 st.push(s[i]);
-            }else{
+              }else{
               //match the pairs
-            if((st.empty() == true) or (s[i] == ')' and st.top() !=  '(') or (s[i] == '}' and st.top() !=  '{') or (s[i] == ']' and st.top() !=  '[') ){
+                if((st.empty() == true) or (s[i] == ')' and st.top() !=  '(') or (s[i] == '}' and st.top() !=  '{') or (s[i] == ']' and st.top() !=  '[') ){
                 return false;
-            }
-            else{
+                }
+                else{
                 st.pop();
-            }  
+                 }  
             }
-            
-            
-            
         }
         
         return st.empty();
