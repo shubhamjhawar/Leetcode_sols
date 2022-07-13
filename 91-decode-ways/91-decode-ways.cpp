@@ -1,37 +1,31 @@
 class Solution {
 public:
-    int helper(string& s,int index,vector<int>& dp){
-        int n = s.size();
-        //Base Case
-        if(index == n) return 1;
-        if(s[index]=='0')return 0;
-        if(index == n-1) return 1;
+    int helper(string& s,int n,vector<int>& dp){
+       
+        if(s[0] == '0') return 0;
+        dp[n%2] = 1;
+        if(s[n-1] != '0')
+            dp[(n-1)%2] = 1;
         
-        
-        int lh = 0;
-        int rh = 0;
-        
-        if(dp[index] != -1){
-            return dp[index];
+        for(int i = n-2 ; i >= 0 ; i--){
+            int cnt  = 0;
+            if(s[i] != '0'){
+                cnt += dp[(i+1)%2];
+            }
+            if(s[i] == '1' || (s[i] == '2' and s[i+1] <= '6')){
+                cnt += dp[(i+2)%2];
+            }
+            
+            dp[i%2] = cnt;
         }
         
-        //Recursive case
-        if(s[index] != '0'){
-            lh = helper(s,index+1,dp);
-        }
-        
-        if(index + 1 < n && s[index] != '0' && (s[index] == '1' || s[index] == '2' && s[index+1] <= '6' )){
-            rh = helper(s,index+2,dp);
-        }
-        
-        
-        return dp[index] = (lh + rh);
+        return dp[0%2];
     }
     int numDecodings(string s) {
+        
         int n = s.size();
-        vector<int> dp(n,-1);
-     
-        return helper(s,0,dp);
+        vector<int> dp(2,0);
+        return helper(s,n,dp);
         
     }
 };
