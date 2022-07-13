@@ -7,21 +7,24 @@ public:
         int high = m*n -1;
         
         
-        while(low <= high){
+        while(low < high){
             
             int mid = low + (high - low)/2;
-            if(matrix[mid/n][mid%n] == target){
-                return true;
-            }
+            
             
             if(matrix[mid/n][mid%n] < target){
                 low = mid + 1;
             }
             else{
-                high = mid-1;
+                high = mid;
             }
         }
         
-        return false;
+        if(matrix[low/n][low%n] == target){
+                return true;
+        }
+        else{
+            return false;
+        }
     }
 };
