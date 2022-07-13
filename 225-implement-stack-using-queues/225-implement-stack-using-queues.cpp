@@ -25,7 +25,6 @@ public:
         if(q1.size() > 0){
             ans = q1.front();
             q1.pop();
-            curr_size--;
         }
         
         return ans;
