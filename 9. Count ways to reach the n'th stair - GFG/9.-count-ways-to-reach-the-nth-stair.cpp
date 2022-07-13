@@ -11,18 +11,14 @@ class Solution
     
     int countWays(int n)
     {
-        vector<int> dp(n + 1, -1);
-        dp[0] = 1;
-        for(int i = 1; i <= n ; i++){
-            int x = dp[i - 1];
-            int y = 0;
-            if(i - 2 >= 0){
-                y += dp[i - 2];
-            }
-            dp[i] = (x + y)%mod;
+        vector<int> dp(2, -1);
+        dp[0%2] = 1;
+        dp[1%2] = 1;
+        for(int i = 2; i <= n ; i++){
+           dp[i%2] = (dp[(i-1)%2] + dp[(i-2)%2])%mod;
         }
         
-        return dp[n];
+        return dp[n%2];
     }
 };
 
