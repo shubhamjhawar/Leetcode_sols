@@ -1,14 +1,11 @@
 class Solution {
 public:
     bool f(vector<int>& arr,int k,int n, vector<vector<bool>>& dp){
-    
-    
-    
+   
     if(arr[0]<=k)
       dp[0%2][arr[0]] = true;
     
     for(int i = 1; i < n ;i++){
-         // dp[i][0] = true;
         for(int target = 0 ; target <= k ; target++){
             if(target == 0){
                 dp[i%2][target] = true;
