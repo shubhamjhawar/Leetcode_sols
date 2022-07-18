@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool f(int n,unordered_set<int>& mp){
+    bool f(int n){
         
         if(n == 1){
             return true;
@@ -16,11 +16,9 @@ public:
             n = n/10;
         }
         
-        mp.insert(sum);
-        return f(sum,mp);
+        return f(sum);
     }
     bool isHappy(int n) {
-        unordered_set<int> mp;
-        return f(n,mp);
+        return f(n);
     }
 };
