@@ -20,10 +20,8 @@ public:
             return true;
         }
         
-        
-        
         //Recursive step
-        bool ans_r = true, ans_l = true;
+        bool ans_r = false, ans_l = false;
         int height_l = -1,height_r = -1;
         
         //Get the height of left subtree
