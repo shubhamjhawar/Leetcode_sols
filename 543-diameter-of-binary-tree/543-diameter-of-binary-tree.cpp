@@ -27,6 +27,7 @@ public:
         rh = f(root->right,res);
         
         
+        //Calculate teh max diamater till date as a whole
         res = max(lh+rh,res);
         //calculate the result as follows
         
