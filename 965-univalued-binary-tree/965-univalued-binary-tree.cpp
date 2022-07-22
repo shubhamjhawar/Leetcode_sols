@@ -24,16 +24,7 @@ public:
             return false;
         }
         
-        bool l = true ,r = true;
-        //Left Subtree
-        if(root->left)
-            l = f(root->left,val);
-        
-        //Right Subtree
-        if(root->right)
-            r = f(root->right,val);
-        
-        return l && r;
+       return f(root->left,val) && f(root->right,val);
         
     }
     bool isUnivalTree(TreeNode* root) {
