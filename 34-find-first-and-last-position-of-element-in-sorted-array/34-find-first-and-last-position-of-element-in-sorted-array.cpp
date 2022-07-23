@@ -3,8 +3,10 @@ public:
     vector<int> searchRange(vector<int>& nums, int target) {
         
         vector<int> res;
+        
+        
         //F*T* pattern
-        // arr[mid] >= target
+        //arr[mid] >= target
         //First T is the element we need
         int n = nums.size();
         if(nums.size() == 0) return {-1 , -1};
@@ -32,6 +34,7 @@ public:
         
         //F*T*
         //arr[mid] > target
+        //Last F
         
         low = 0 ;
         high = n-1;
@@ -48,9 +51,7 @@ public:
             }
              
         }
-        if(nums[low] == target){
-            res.push_back(low);
-        }
+        res.push_back(low);
         
         return res; 
     }
