@@ -24,13 +24,16 @@ public:
         bool ans_l = false,ans_r = false;
         long min_l ,min_r,max_r,max_l;
         
+        //Calulate what we need for further up calculations
         ans_l = isValidBSTHelper(root->left,max_l,min_l);
         ans_r = isValidBSTHelper(root->right,max_r,min_r);
         
         
+        //calculate the maximum for further calculations
         min_elt = min(long(root->val),min(min_l,min_r));
         max_elt = max(long(root->val),max(max_l,max_r));
         
+        //Return the answer 
         return ans_l && ans_r && (root->val > max_l && root->val < min_r);
         
     }
