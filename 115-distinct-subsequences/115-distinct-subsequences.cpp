@@ -6,13 +6,15 @@ public:
        if(j < 0) return 1;
        if(i < 0) return 0;
        
+       
+       
        if(dp[i][j] != -1){
            return dp[i][j];
        }
        
        int lh = 0,rh = 0;
-      
-       
+       //Recursive case
+       //cout << s[i] << " " << t[j] << " " << endl;
        if(s[i] == t[j]){
            lh = f(dp,s,t,i-1,j-1);
            rh = f(dp,s,t,i-1,j);
