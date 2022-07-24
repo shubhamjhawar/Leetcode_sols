@@ -11,37 +11,23 @@
  */
 class Solution {
 public:
-    bool isValidBSTHelper(TreeNode* root,long &max_elt,long &min_elt){
+    bool isValidBSTHelper(TreeNode* root,long min,long max){
         
-        //Base case
-        if(!root){
-            min_elt = LONG_MAX;
-            max_elt = LONG_MIN;
-            return true;
+       if(!root){
+           return true;
+       }
+        
+        if (root -> val <= min || root -> val >= max) {
+            return false;
         }
-       
-        //Recursive case
-        bool ans_l = false,ans_r = false;
-        long min_l ,min_r,max_r,max_l;
         
-        //Calulate what we need for further up calculations
-        ans_l = isValidBSTHelper(root->left,max_l,min_l);
-        ans_r = isValidBSTHelper(root->right,max_r,min_r);
-        
-        
-        //calculate the maximum for further calculations
-        min_elt = min(long(root->val),min(min_l,min_r));
-        max_elt = max(long(root->val),max(max_l,max_r));
-        
-        //Return the answer 
-        return ans_l && ans_r && (root->val > max_l && root->val < min_r);
-        
+        return isValidBSTHelper(root->left,min,root->val) && isValidBSTHelper(root->right,root->val,max);
     }
     bool isValidBST(TreeNode* root) {
-       long min_elt = LONG_MAX;
-       long max_elt = LONG_MIN;
+       long min = LONG_MIN;
+       long max = LONG_MAX;
         
-       return isValidBSTHelper(root,min_elt,max_elt);
+       return isValidBSTHelper(root,min,max);
         
         
     }
