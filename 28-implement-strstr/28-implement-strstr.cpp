@@ -1,52 +1,48 @@
 class Solution {
 public:
-    bool check(string& haystack,int i ,int j,string& needle){
-        int sz = needle.size();
-        while(i <= j){
-            if(haystack[i] != needle[sz - (j-i+1)])
-                return false;
-            
-            i++;
+//Kmp algorithm
+void f(string& pattern,vector<int>& res){
+        int j = 0;
+        res[0]  =  0;
+        int i  =   1;
+        while(i < pattern.length()) {
+            if(pattern[i] == pattern[j]) {
+                res[i] = j+1;
+                i++;
+                j++;
+            } 
+            else if (j > 0) {
+                j = res[j-1];
+            }
+            else {
+                  res[i] = 0;
+                  i++;
+            }
         }
-        
-        return true;
+    
     }
     int strStr(string haystack, string needle) {
-        int k = needle.size();
-        int i = 0, j = 0;
-        bool flag = false;
         
-        //Sliding Window Technique as a whole
-        while(j < haystack.size()){
-            
-            //Keep sliding the window till it
-            //becomes the appropriate size
-            if(j - i + 1 < k){
+        //Computing the LCP
+        int n = needle.size();
+        vector<int> res(n,0);
+        f(needle,res);
+        
+        int i = 0,j = 0;
+        //Implement kmp search 
+        while(i < haystack.size() && j < needle.size()) {
+            if(haystack.at(i) == needle.at(j)) {
+                i++; 
                 j++;
+            } else if(j > 0) {
+                j = res[j - 1];
+            } else {
+                i++;
             }
-            //if Window size == k
-            //Check if the first element itself is not equal 
-            else if(j - i + 1 == k){
-                if(haystack[i] != needle[0]){
-                    i++;
-                    j++;
-                }
-            else{
-                 bool isEqual = check(haystack,i,j,needle);
-                  if(isEqual) {
-                    flag = true;
-                     break;
-                   }
-                  i++;
-                  j++;  
-              }  
-          }
-                
         }
         
-        if(flag) 
-            return i;
-        else 
-            return -1;
+        return j == needle.size() ? i - j : -1;
+        
+        
     }
 };
