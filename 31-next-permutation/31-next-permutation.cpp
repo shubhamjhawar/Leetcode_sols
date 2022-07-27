@@ -10,18 +10,23 @@ public:
         }
         if(pivot < 0){
             reverse(nums.begin(),nums.end());
+            return;
         }
         else{
-            for(i = n-1 ; i > pivot ; i--){
+           i = n-1;
+        
+            for(i = n-1 ;i >pivot ; i--){
                 if(nums[i] > nums[pivot]){
                     break;
                 }
             }
             
-            swap(nums[pivot],nums[i]);
+            swap(nums[i],nums[pivot]);
         
-        reverse(nums.begin() + pivot + 1,nums.end());
         }
+       
+        reverse(nums.begin() + pivot + 1,nums.end());
+    
     
     }
 };
