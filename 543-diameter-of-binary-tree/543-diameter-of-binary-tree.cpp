@@ -11,13 +11,13 @@
  */
 class Solution {
 public:
-    //return the res and also calculate the height of the tree
+    //return the res and also calculate the height of the tree in each step
     int f(TreeNode* root,int& res){
         
         //Base case
         if(!root){
             return 0;
-            res = max(res,0);
+            //res = max(res,0);
         }
         
         //Recursive case
@@ -27,8 +27,10 @@ public:
         rh = f(root->right,res);
         
         
-        //Calculate teh max diamater till date as a whole
+        //Calculate the max diamater till date as a whole
         res = max(lh+rh,res);
+        
+        
         //calculate the result as follows
         
         return 1 + max(lh,rh);
