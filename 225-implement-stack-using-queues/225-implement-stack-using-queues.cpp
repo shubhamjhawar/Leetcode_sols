@@ -9,15 +9,13 @@ public:
     
     void push(int x) {
         
-        curr_size++;
         q1.push(x);
         int i = 0;
-        while(i < q1.size()-1){
+        int n = q1.size();
+        while(i++ < n-1){
             q1.push(q1.front());
             q1.pop();
-            i++;
-        }
-        
+        }  
     }
     
     int pop() {
