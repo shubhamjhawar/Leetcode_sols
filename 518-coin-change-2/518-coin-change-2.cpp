@@ -35,8 +35,35 @@ public:
 
     int change(int amount, vector<int>& coins) {
         int n = coins.size();
-        vector<vector<int>> dp(n,vector<int>(amount+1,-1));
-        int ans = f(n-1,coins,amount,dp);
-        return ans;
+        vector<vector<int>> dp(2,vector<int>(amount+1,-1));
+//         int ans = f(n-1,coins,amount,dp);
+//         return ans;
+        
+        for(int target = 0 ;target <= amount ; target++){
+           if(target%coins[0] == 0){
+               dp[0%2][target] = 1;
+           }else{
+               dp[0%2][target] = 0;
+           }
+        }
+        
+        for(int index = 1 ; index < n ; index++){
+            for(int target = 0 ; target <= amount ; target++){
+                if(target == 0){
+                    dp[index%2][target] = 1;
+                }
+                
+                int not_take = 0 + dp[(index-1)%2][target];
+        
+                int take = 0;
+                if(coins[index] <= target){
+                    take = dp[index%2][target - coins[index]];
+               }
+        
+               dp[index%2][target] =  take + not_take;
+            }
+        }
+        
+        return dp[(n-1)%2][amount];
     }
 };
